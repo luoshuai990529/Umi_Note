@@ -31,10 +31,10 @@ let HomeModel = {
   // 发送异步action
   effects: {
     // 这里会拦截effects中的asyncGetInfo类型的action
-    *asyncGetInfo(state, { put }) {
+    *asyncGetInfo(state, { call,put }) {
       console.log("拦截asyncGetInfo");
       // 进行异步拦截处理
-      const data = yield newSetTiming(1000);
+      const data = yield newSetTiming(1000); //相当于：call(newSetTiming ,1000)
       // 保存异步数据调用put方法，这里相当于调用dispatch(changeInfoAction(data))
       yield put({ type: "changeInfoAction", info: data });
     },
